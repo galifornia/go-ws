@@ -62,6 +62,14 @@
 <script>
     let socket = null;
 
+    window.onbeforeunload = () => {
+        console.log("Leaving");
+        let req = {
+            action: "LOG_OFF"
+        };
+        socket.send(JSON.stringify(req))
+    };
+
     document.addEventListener("DOMContentLoaded", () => {
         socket = new WebSocket("ws://127.0.0.1:8080/ws");
 

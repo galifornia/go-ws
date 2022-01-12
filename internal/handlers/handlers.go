@@ -110,6 +110,14 @@ func ListenWsChannel() {
 			response.ConnectedUsers = users
 
 			BroadcastToAll(response)
+		case "LOG_OFF":
+			delete(clients, e.Conn)
+
+			users := getUserList()
+			response.Action = "CONNECTED_USERS"
+			response.ConnectedUsers = users
+
+			BroadcastToAll(response)
 		}
 
 		// response.Action = e.Action
