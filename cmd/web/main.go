@@ -15,5 +15,5 @@ func main() {
 
 	log.Println("Starting web server on port 8080")
 
-	_ = http.ListenAndServe(":8080", mux)
+	_ = http.ListenAndServe("localhost:8080", mux)
 }
