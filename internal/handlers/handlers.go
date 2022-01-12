@@ -60,11 +60,13 @@ func WsEndpoint(w http.ResponseWriter, r *http.Request) {
 
 	log.Println("Client upgraded to WS")
 
-	var response WsJsonResponse
-	response.Message = `<em><small>Connected to server</small></em>`
-
 	conn := WebSocketConnection{Conn: ws}
 	clients[conn] = ""
+
+	var response WsJsonResponse
+	users := getUserList()
+	response.Action = "CONNECTED_USERS"
+	response.ConnectedUsers = users
 
 	err = ws.WriteJSON(response)
 	if err != nil {
