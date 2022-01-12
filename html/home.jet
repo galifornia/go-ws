@@ -38,6 +38,7 @@
                 <div class="form-group">
                     <label for="message">Message</label>
                     <input type="text" name="message" id="message" class="form-control" autocomplete="off">
+                    <button type="submit" id="send_msg">Send message</button>
                 </div>
 
                 <input type="hidden" name="action" id="action">
@@ -93,7 +94,7 @@
                     let ul = document.getElementById("online_users");
                     while (ul.firstChild) ul.removeChild(ul.firstChild);
 
-                    if (data.connected_users.length > 0) {
+                    if (data.connected_users && data.connected_users.length > 0) {
                         data.connected_users.forEach(user => {
                             const li = document.createElement("li");
                             li.appendChild(document.createTextNode(user));
