@@ -42,7 +42,10 @@
                 <div class="form-group">
                     <label for="message">Message</label>
                     <input type="text" name="message" id="message" class="form-control" autocomplete="off">
-                    <button class="btn btn-outline-secondary mt-4" id="send_btn">Send message</button>
+                    <div class="mt-4 d-flex flex-row justify-content-sm-between align-items-center">
+                        <button class="btn btn-outline-secondary" id="send_btn">Send message</button>
+                        <div id="status"></div>
+                    </div>
                 </div>
 
                 <input type="hidden" name="action" id="action">
@@ -86,15 +89,23 @@
             reconnectInterval: 3000
         });
 
+        const offlineSpan = `<span class="badge bg-danger">Disconnected</span>`;
+        const onlineSpan = `<span class="badge bg-success">Connected</span>`;
+        const statusDiv = document.getElementById("status");
+
+
         socket.onopen = () => {
+            statusDiv.innerHTML = onlineSpan;
             console.log("Websocket succesfully opened");
         };
 
         socket.onclose = () => {
+            statusDiv.innerHTML = offlineSpan;
             console.log("Websocket conection close");
         };
 
         socket.onerror = () => {
+            statusDiv.innerHTML = offlineSpan;
             console.log("Websocket there was an error");
         };
 
